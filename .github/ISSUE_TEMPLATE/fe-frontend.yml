@@ -1,21 +1,23 @@
-name: "🎨 Frontend"
+name: "FE"
 description: "프론트엔드 관련 이슈"
 title: "[FE] "
-labels: ["frontend", "🎨 fe"]
+labels: ["frontend"]
 assignees: []
 
 body:
   - type: dropdown
     id: type
     attributes:
-      label: "이슈 타입"
-      description: "어떤 종류의 이슈인가요?"
+      label: "Issue Type"
+      description: "Select Issue Type"
       options:
-        - "🚀 feature - 새로운 기능"
-        - "🐛 bug - 버그 수정"
-        - "✨ enhancement - 기능 개선"
-        - "🎨 style - UI/스타일 변경"
-        - "♻️ refactor - 리팩토링"
+        - "✨ feature"
+        - "♻️ refactor"
+        - "✅ test"
+        - "⚙️ chore"
+        - "🎨 design"
+        - "🐛 bug/error"
+        - "📝 documentation"
       default: 0
     validations:
       required: true
@@ -23,7 +25,7 @@ body:
   - type: input
     id: title
     attributes:
-      label: "제목"
+      label: "Title"
       description: "이슈의 제목을 입력해주세요"
       placeholder: "예: 로그인 컴포넌트 추가"
     validations:
@@ -32,16 +34,7 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: "📝 상세 설명"
+      label: "Description"
       description: "이슈에 대한 자세한 설명을 작성해주세요"
-      placeholder: |
-        ## 설명
-        무엇을 개발/수정하고자 하나요?
-
-        ## 배경
-        왜 이 작업이 필요한가요?
-
-        ## 예상 결과
-        어떤 결과를 기대하나요?
     validations:
-      required: true
+      required: false
