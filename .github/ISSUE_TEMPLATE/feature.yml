@@ -1,0 +1,29 @@
+name: "🚀 Feature Request"
+description: "새로운 기능 요청"
+title: "[CATEGORY] 🚀 "
+labels: ["🚀 feature"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: "카테고리"
+      description: "어떤 영역의 기능인가요?"
+      options:
+        - "[FE] Frontend"
+        - "[BE] Backend"
+        - "[LLM] LLM Service"
+        - "[INFRA] Infrastructure"
+        - "[DOCS] Documentation"
+        - "[SHARED] Shared/Common"
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "📌 기능 설명"
+      description: "구현하고자 하는 기능을 자세히 설명해주세요"
+      placeholder: "어떤 기능을 원하시나요?"
+    validations:
+      required: true
