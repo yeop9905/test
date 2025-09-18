@@ -1,7 +1,7 @@
 name: "LLM"
 description: "LLM 서비스 관련 이슈"
 title: "[LLM] "
-labels: ["llm"]
+labels: ["LLM"]
 assignees: []
 
 body:

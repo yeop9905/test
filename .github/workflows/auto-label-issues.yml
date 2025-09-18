@@ -21,38 +21,27 @@ jobs:
             const body = issue.body;
             const title = issue.title;
 
-            console.log('Issue body:', body);
-            console.log('Issue title:', title);
-
             const labels = [];
 
-            // 이슈 타입 추출 및 라벨 매핑
             const typeMatch = body.match(/### Issue Type\s*\n\s*(.+)/);
             if (typeMatch) {
               const type = typeMatch[1].trim();
-              console.log('Issue type:', type);
-              
               labels.push(type);
             }
 
-            // 카테고리별 라벨 추가 (title prefix 기반)
             if (title.startsWith('[FE]')) {
-              labels.push('frontend');
+              labels.push('FE');
             } else if (title.startsWith('[BE]')) {
-              labels.push('backend');
+              labels.push('BE');
             } else if (title.startsWith('[LLM]')) {
-              labels.push('llm');
+              labels.push('LLM');
             } else if (title.startsWith('[INFRA]')) {
-              labels.push('infrastructure');
+              labels.push('INFRA');
             } else if (title.startsWith('[GENERAL]')) {
-              labels.push('general');
+              labels.push('GENERAL');
             }
 
-
-            // 중복 제거
             const uniqueLabels = [...new Set(labels)];
-
-            console.log('Labels to add:', uniqueLabels);
 
             if (uniqueLabels.length > 0) {
               await github.rest.issues.addLabels({
@@ -61,6 +50,4 @@ jobs:
                 issue_number: issue.number,
                 labels: uniqueLabels
               });
-              
-              console.log('Labels added successfully');
             }

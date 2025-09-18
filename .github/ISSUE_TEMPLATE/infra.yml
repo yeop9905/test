@@ -1,7 +1,7 @@
 name: "INFRA"
 description: "인프라 및 DevOps 관련 이슈"
 title: "[INFRA] "
-labels: ["infrastructure"]
+labels: ["INFRA"]
 assignees: []
 
 body:

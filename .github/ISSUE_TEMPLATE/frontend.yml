@@ -1,7 +1,7 @@
 name: "FE"
 description: "프론트엔드 관련 이슈"
 title: "[FE] "
-labels: ["frontend"]
+labels: ["FE"]
 assignees: []
 
 body:
