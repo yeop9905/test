@@ -1,0 +1,74 @@
+name: "⚙️ Backend"
+description: "백엔드 관련 이슈"
+title: "[BE] "
+labels: ["backend", "⚙️ be"]
+assignees: []
+
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: "이슈 타입"
+      description: "어떤 종류의 이슈인가요?"
+      options:
+        - "🚀 feature - 새로운 API/기능"
+        - "🐛 bug - 버그 수정"
+        - "⚡ performance - 성능 개선"
+        - "🔒 security - 보안 강화"
+        - "♻️ refactor - 리팩토링"
+        - "🗃️ database - DB 관련"
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: "제목"
+      description: "이슈의 제목을 입력해주세요"
+      placeholder: "예: 사용자 인증 API 구현"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "📝 상세 설명"
+      description: "이슈에 대한 자세한 설명을 작성해주세요"
+      placeholder: |
+        ## 설명
+        무엇을 개발/수정하고자 하나요?
+        
+        ## API 스펙 (해당하는 경우)
+        - Endpoint: 
+        - Method: 
+        - Request/Response:
+        
+        ## 배경
+        왜 이 작업이 필요한가요?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "✅ 완료 조건"
+      description: "이 이슈가 완료되었다고 판단할 수 있는 조건들"
+      placeholder: |
+        - [ ] API 구현 완료
+        - [ ] 단위 테스트 작성
+        - [ ] 통합 테스트 작성
+        - [ ] 에러 핸들링 구현
+        - [ ] 로깅 추가
+        - [ ] API 문서 작성
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: "📎 추가 정보"
+      description: "관련 문서, 참고 자료 등"
+      placeholder: "관련 이슈, API 문서, 참고 자료 등"
+    validations:
+      required: false

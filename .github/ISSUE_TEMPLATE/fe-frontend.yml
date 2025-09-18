@@ -1,0 +1,69 @@
+name: "🎨 Frontend"
+description: "프론트엔드 관련 이슈"
+title: "[FE] "
+labels: ["frontend", "🎨 fe"]
+assignees: []
+
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: "이슈 타입"
+      description: "어떤 종류의 이슈인가요?"
+      options:
+        - "🚀 feature - 새로운 기능"
+        - "🐛 bug - 버그 수정"
+        - "✨ enhancement - 기능 개선"
+        - "🎨 style - UI/스타일 변경"
+        - "♻️ refactor - 리팩토링"
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: "제목"
+      description: "이슈의 제목을 입력해주세요"
+      placeholder: "예: 로그인 컴포넌트 추가"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "📝 상세 설명"
+      description: "이슈에 대한 자세한 설명을 작성해주세요"
+      placeholder: |
+        ## 설명
+        무엇을 개발/수정하고자 하나요?
+        
+        ## 배경
+        왜 이 작업이 필요한가요?
+        
+        ## 예상 결과
+        어떤 결과를 기대하나요?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: "✅ 완료 조건"
+      description: "이 이슈가 완료되었다고 판단할 수 있는 조건들"
+      placeholder: |
+        - [ ] 컴포넌트 구현 완료
+        - [ ] 반응형 디자인 적용
+        - [ ] 접근성 검증 완료
+        - [ ] 단위 테스트 작성
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: "📎 추가 정보"
+      description: "디자인 시안, 참고 자료 등"
+      placeholder: "Figma 링크, 스크린샷, 참고 자료 등"
+    validations:
+      required: false
