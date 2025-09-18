@@ -29,18 +29,6 @@ jobs:
               labels.push(type);
             }
 
-            if (title.startsWith('[FE]')) {
-              labels.push('FE');
-            } else if (title.startsWith('[BE]')) {
-              labels.push('BE');
-            } else if (title.startsWith('[LLM]')) {
-              labels.push('LLM');
-            } else if (title.startsWith('[INFRA]')) {
-              labels.push('INFRA');
-            } else if (title.startsWith('[GENERAL]')) {
-              labels.push('GENERAL');
-            }
-
             const uniqueLabels = [...new Set(labels)];
 
             if (uniqueLabels.length > 0) {
