@@ -1,4 +1,4 @@
-name: "LLM"
+name: "llm"
 description: "LLM 서비스 관련 이슈"
 title: "[LLM] "
 labels: ["LLM"]
