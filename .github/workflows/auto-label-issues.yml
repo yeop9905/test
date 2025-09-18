@@ -39,3 +39,10 @@ jobs:
                 labels: uniqueLabels
               });
             }
+
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              assignees: [issue.user.login]
+            });
