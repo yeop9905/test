@@ -1,0 +1,40 @@
+name: "INFRA"
+description: "인프라 및 DevOps 관련 이슈"
+title: "[INFRA] "
+labels: ["infrastructure"]
+assignees: []
+
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: "Issue Type"
+      description: "Select Issue Type"
+      options:
+        - "✨ feature"
+        - "♻️ refactor"
+        - "✅ test"
+        - "⚙️ chore"
+        - "🎨 design"
+        - "🐛 bug/error"
+        - "📝 documentation"
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: "Title"
+      description: "이슈의 제목을 입력해주세요"
+      placeholder: "예: Redis 클러스터 구성"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "이슈에 대한 자세한 설명을 작성해주세요"
+    validations:
+      required: false
