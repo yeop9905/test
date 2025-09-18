@@ -1,0 +1,72 @@
+name: Format Issue Title
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  format-title:
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.body, '카테고리')
+
+    steps:
+      - name: Extract category and format title
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body;
+
+            // 카테고리 추출
+            const categoryMatch = body.match(/### 카테고리\s*\n\s*(.+)/);
+            const titleMatch = body.match(/### 제목\s*\n\s*(.+)/);
+
+            if (categoryMatch && titleMatch) {
+              const category = categoryMatch[1].trim();
+              const originalTitle = titleMatch[1].trim();
+              
+              // 카테고리 매핑
+              const categoryMap = {
+                'FE': '[FE]',
+                'BE': '[BE]',
+                'LLM': '[LLM]',
+                'INFRA': '[INFRA]',
+                'DOCS': '[DOCS]',
+                'SHARED': '[SHARED]'
+              };
+              
+              const prefix = categoryMap[category] || `[${category}]`;
+              const newTitle = `${prefix} ${originalTitle}`;
+              
+              // 이슈 제목 업데이트
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                title: newTitle
+              });
+              
+              // 카테고리에 따른 라벨 추가
+              const labels = ['🚀 feature'];
+              
+              // 카테고리별 라벨 추가
+              const categoryLabels = {
+                'FE': 'frontend',
+                'BE': 'backend', 
+                'LLM': 'llm',
+                'INFRA': 'infrastructure',
+                'DOCS': 'documentation',
+                'SHARED': 'shared'
+              };
+              
+              if (categoryLabels[category]) {
+                labels.push(categoryLabels[category]);
+              }
+              
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
