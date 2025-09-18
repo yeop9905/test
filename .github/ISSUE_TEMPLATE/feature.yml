@@ -1,6 +1,6 @@
 name: "🚀 Feature Request"
 description: "새로운 기능 요청"
-title: "[CATEGORY] 🚀 "
+title: "🚀 "
 labels: ["🚀 feature"]
 body:
   - type: dropdown
@@ -9,13 +9,22 @@ body:
       label: "카테고리"
       description: "어떤 영역의 기능인가요?"
       options:
-        - "[FE] Frontend"
-        - "[BE] Backend"
-        - "[LLM] LLM Service"
-        - "[INFRA] Infrastructure"
-        - "[DOCS] Documentation"
-        - "[SHARED] Shared/Common"
+        - "FE"
+        - "BE" 
+        - "LLM"
+        - "INFRA"
+        - "DOCS"
+        - "SHARED"
       default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: "제목"
+      description: "기능의 제목을 입력해주세요 (카테고리는 자동으로 추가됩니다)"
+      placeholder: "예: 사용자 로그인 기능 추가"
     validations:
       required: true
 
