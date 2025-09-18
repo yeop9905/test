@@ -22,15 +22,6 @@ body:
     validations:
       required: true
 
-  - type: input
-    id: title
-    attributes:
-      label: "Title"
-      description: "이슈의 제목을 입력해주세요"
-      placeholder: "예: 로그인 컴포넌트 추가"
-    validations:
-      required: true
-
   - type: textarea
     id: description
     attributes:
