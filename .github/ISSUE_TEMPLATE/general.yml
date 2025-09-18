@@ -12,7 +12,7 @@ body:
       description: "가장 적합한 카테고리를 선택해주세요"
       options:
         - "🎨 Frontend"
-        - "⚙️ Backend" 
+        - "⚙️ Backend"
         - "🤖 LLM Service"
         - "🏗️ Infrastructure"
         - "📚 Documentation"
@@ -58,32 +58,11 @@ body:
       placeholder: |
         ## 설명
         무엇을 하고자 하나요?
-        
+
         ## 배경
         왜 이 작업이 필요한가요?
-        
+
         ## 예상 결과
         어떤 결과를 기대하나요?
     validations:
       required: true
-
-  - type: textarea
-    id: acceptance_criteria
-    attributes:
-      label: "✅ 완료 조건"
-      description: "이 이슈가 완료되었다고 판단할 수 있는 조건들"
-      placeholder: |
-        - [ ] 조건 1
-        - [ ] 조건 2
-        - [ ] 조건 3
-    validations:
-      required: false
-
-  - type: textarea
-    id: additional_context
-    attributes:
-      label: "📎 추가 정보"
-      description: "스크린샷, 링크, 참고자료 등"
-      placeholder: "관련 자료, 참고 링크 등"
-    validations:
-      required: false

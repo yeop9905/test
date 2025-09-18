@@ -1,0 +1,109 @@
+name: Auto Label Issues
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Extract issue info and add labels
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body;
+            const title = issue.title;
+            
+            console.log('Issue body:', body);
+            console.log('Issue title:', title);
+            
+            const labels = [];
+            
+            // 이슈 타입 추출 및 라벨 매핑
+            const typeMatch = body.match(/### 이슈 타입\s*\n\s*(.+)/);
+            if (typeMatch) {
+              const type = typeMatch[1].trim();
+              console.log('Issue type:', type);
+              
+              // 타입별 라벨 매핑
+              const typeLabels = {
+                '🚀 feature - 새로운 기능': ['feature', '🚀 feature'],
+                '🚀 feature - 새로운 API/기능': ['feature', '🚀 feature'],
+                '🚀 feature - 새로운 LLM 기능': ['feature', '🚀 feature'],
+                '🚀 feature - 새로운 인프라 구성': ['feature', '🚀 feature'],
+                '🐛 bug - 버그 수정': ['bug', '🐛 bug'],
+                '🐛 bug - LLM 응답 오류': ['bug', '🐛 bug'],
+                '🐛 bug - 배포/운영 이슈': ['bug', '🐛 bug'],
+                '✨ enhancement - 기능 개선': ['enhancement', '✨ enhancement'],
+                '🎨 style - UI/스타일 변경': ['style', '🎨 design'],
+                '♻️ refactor - 리팩토링': ['refactor', '♻️ refactor'],
+                '⚡ performance - 성능 개선': ['performance', '⚡ performance'],
+                '⚡ performance - 응답 속도 개선': ['performance', '⚡ performance'],
+                '🔒 security - 보안 강화': ['security', '🔒 security'],
+                '🗃️ database - DB 관련': ['database', '🗃️ database'],
+                '🎯 accuracy - 정확도 개선': ['accuracy', '🎯 accuracy'],
+                '💰 cost - 비용 최적화': ['cost-optimization', '💰 cost'],
+                '🔧 integration - 외부 서비스 연동': ['integration', '🔧 integration'],
+                '🔧 maintenance - 유지보수': ['maintenance', '🔧 maintenance'],
+                '📊 monitoring - 모니터링 설정': ['monitoring', '📊 monitoring'],
+                '📚 docs - 문서화': ['documentation', '📚 docs'],
+                '🧪 test - 테스트': ['test', '🧪 test'],
+                '🔧 chore - 기타 작업': ['chore', '🔧 chore'],
+                '❓ question - 질문': ['question', '❓ question']
+              };
+              
+              if (typeLabels[type]) {
+                labels.push(...typeLabels[type]);
+              }
+            }
+            
+            // 카테고리별 라벨 추가 (title prefix 기반)
+            if (title.startsWith('[FE]')) {
+              labels.push('frontend', '🎨 frontend');
+            } else if (title.startsWith('[BE]')) {
+              labels.push('backend', '⚙️ backend');
+            } else if (title.startsWith('[LLM]')) {
+              labels.push('llm', '🤖 llm');
+            } else if (title.startsWith('[INFRA]')) {
+              labels.push('infrastructure', '🏗️ infra');
+            } else if (title.startsWith('[GENERAL]')) {
+              labels.push('general', '📋 general');
+            }
+            
+            // 우선순위 라벨 추가 (General 템플릿용)
+            const priorityMatch = body.match(/### ⭐ 우선순위\s*\n\s*(.+)/);
+            if (priorityMatch) {
+              const priority = priorityMatch[1].trim();
+              const priorityLabels = {
+                '🔴 HIGH - 긴급': ['priority: high', '🔴 high'],
+                '🟡 MEDIUM - 보통': ['priority: medium', '🟡 medium'],
+                '🟢 LOW - 낮음': ['priority: low', '🟢 low']
+              };
+              
+              if (priorityLabels[priority]) {
+                labels.push(...priorityLabels[priority]);
+              }
+            }
+            
+            // 중복 제거
+            const uniqueLabels = [...new Set(labels)];
+            
+            console.log('Labels to add:', uniqueLabels);
+            
+            if (uniqueLabels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: uniqueLabels
+              });
+              
+              console.log('Labels added successfully');
+            }

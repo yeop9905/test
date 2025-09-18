@@ -37,33 +37,11 @@ body:
       placeholder: |
         ## 설명
         무엇을 개발/수정하고자 하나요?
-        
+
         ## 배경
         왜 이 작업이 필요한가요?
-        
+
         ## 예상 결과
         어떤 결과를 기대하나요?
     validations:
       required: true
-
-  - type: textarea
-    id: acceptance_criteria
-    attributes:
-      label: "✅ 완료 조건"
-      description: "이 이슈가 완료되었다고 판단할 수 있는 조건들"
-      placeholder: |
-        - [ ] 컴포넌트 구현 완료
-        - [ ] 반응형 디자인 적용
-        - [ ] 접근성 검증 완료
-        - [ ] 단위 테스트 작성
-    validations:
-      required: false
-
-  - type: textarea
-    id: additional_context
-    attributes:
-      label: "📎 추가 정보"
-      description: "디자인 시안, 참고 자료 등"
-      placeholder: "Figma 링크, 스크린샷, 참고 자료 등"
-    validations:
-      required: false
